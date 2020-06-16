@@ -33,7 +33,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/i18n.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -65,6 +65,12 @@ export default {
     extend(config, ctx) {}
   },
 
+  router: {
+    middleware: 'i18n'
+  },
+  generate: {
+    routes: ['/', '/about', '/pl', '/pl/about']
+  },
   /* env usage: process.env.baseUrl */
   env: {
     baseUrl: process.env.BASE_URL || 'https://firebase/link'
