@@ -1,59 +1,85 @@
 <template>
-  <div>
-    <b-form v-if="show" novalidate @submit="onSubmit" @reset="onReset">
+  <div class="d-flex justify-content-center p-2">
+    <b-form novalidate @submit="onSubmit" @reset="onReset">
       <b-form-group
         id="input-group-1"
-        :label="this.$t('login.email-label')"
+        :label="$t('login.email-label')"
         label-for="email"
-        :description="this.$t('login.email-description')"
+        :description="$t('login.email-description')"
       >
         <b-form-input
-          id="form.email"
-          v-model="form.email"
+          id="form-email"
+          v-model.trim="form.email"
           type="email"
-          :placeholder="this.$t('login.email-placeholder')"
+          :placeholder="$t('login.email-placeholder')"
           :state="validateState('email')"
           @blur="validationTouch('email')"
         ></b-form-input>
         <b-form-invalid-feedback :state="$v.form.email.$error">
-          <span v-if="!$v.form.email.email">
-            {{ $t('login.validation.email') }}
-          </span>
-          <span v-if="!$v.form.email.required && testRequiredEmail">{{
-            $t('login.validation.required')
+          <span v-if="!$v.form.email.email">{{
+            $t('login.validation.email.email')
           }}</span>
+          <span v-if="!$v.form.email.required && testRequiredEmail">
+            {{ $t('login.validation.email.required') }}
+          </span>
+          <i18n
+            v-if="!$v.form.email.maxLength"
+            path="login.validation.email.maxLength"
+            tag="span"
+          >
+            <template #maxlength>{{
+              $v.form.email.$params.maxLength.max
+            }}</template>
+          </i18n>
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+      <b-form-group
+        id="input-group-2"
+        :label="$t('login.password-label')"
+        label-for="form-password"
+        :description="passwordDescription"
+      >
         <b-form-input
-          id="input-2"
-          v-model="form.name"
-          required
-          placeholder="Enter name"
+          id="form-password"
+          v-model.trim="form.password"
+          type="password"
+          :placeholder="$t('login.password-placeholder')"
+          :state="validateState('password')"
+          @blur="validationTouch('password')"
         ></b-form-input>
+        <b-form-invalid-feedback :state="$v.form.password.$error">
+          <span v-if="!$v.form.password.required && testRequiredPassword">
+            {{ $t('login.validation.password.required') }}
+          </span>
+          <span
+            v-if="!$v.form.password.minLength"
+            v-t="{
+              path: 'login.validation.password.minLength',
+              args: {
+                minlength: $v.form.password.$params.minLength.min
+              }
+            }"
+          ></span>
+
+          <i18n
+            v-if="!$v.form.password.maxLength"
+            path="login.validation.password.maxLength"
+            tag="span"
+          >
+            <template #maxlength>{{
+              $v.form.password.$params.maxLength.max
+            }}</template>
+          </i18n>
+        </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group>
-
-      <b-form-group id="input-group-4">
-        <b-form-checkbox-group id="checkboxes-4" v-model="form.checked">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button :disabled="$v.$invalid" type="submit" variant="outline-primary"
+        >Submit</b-button
+      >
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
+    <b-card v-if="false" class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
   </div>
@@ -61,26 +87,27 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { email, required } from 'vuelidate/lib/validators'
+import { email, required, maxLength, minLength } from 'vuelidate/lib/validators'
 export default {
   mixins: [validationMixin],
   data() {
     return {
       testRequiredEmail: false,
+      testRequiredPassword: false,
       form: {
         email: '',
-        name: '',
+        password: '',
         food: null,
         checked: []
-      },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots',
-        'Beans',
-        'Tomatoes',
-        'Corn'
-      ],
-      show: true
+      }
+    }
+  },
+  computed: {
+    passwordDescription() {
+      return this.$t('login.password-description', {
+        minlength: this.$v.form.password.$params.minLength.min,
+        maxlength: this.$v.form.password.$params.maxLength.max
+      })
     }
   },
   methods: {
@@ -92,14 +119,14 @@ export default {
       evt.preventDefault()
       // Reset our form values
       this.form.email = ''
-      this.form.name = ''
+      this.form.password = ''
       this.form.food = null
       this.form.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.testRequiredEmail = false
+      this.testRequiredPassword = false
       this.$nextTick(() => {
-        this.show = true
         this.$v.$reset()
       })
     },
@@ -109,7 +136,11 @@ export default {
     },
     validationTouch(name) {
       const { $touch } = this.$v.form[name]
-      this.testRequiredEmail = true
+      if (name === 'email') {
+        this.testRequiredEmail = true
+      } else if (name === 'password') {
+        this.testRequiredPassword = true
+      }
       $touch()
     }
   },
@@ -117,7 +148,13 @@ export default {
     form: {
       email: {
         email,
-        required
+        required,
+        maxLength: maxLength(50)
+      },
+      password: {
+        required,
+        minLength: minLength(6),
+        maxLength: maxLength(16)
       }
     }
   }

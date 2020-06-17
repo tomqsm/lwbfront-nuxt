@@ -18,11 +18,23 @@
   "login": {
     "title": "Login",
     "email-label": "Email",
-    "email-placeholder": "email",
+    "email-placeholder": "e.g. john@smith.uk",
     "email-description": "Required",
+    "password-label": "Password",
+    "password-placeholder": "enter password",
+    "password-description": "Required length between {minlength} and {maxlength} characters.",
     "validation": {
-      "required": "This field is required.",
-      "email": "Please enter a valid email address."
+      "email": {
+        "required": "This field is required.",
+        "email": "Please enter a valid email address.",
+        "maxLength": "Field '@:login.email-label' must have at most {maxlength} characters."
+      },
+      "password": {
+        "required": "Please enter password.",
+        "password": "Invalid password",
+        "minLength": "Field '@:login.password-label' requires min {minlength} characters.",
+        "maxLength": "Field '@:login.password-label' exeeds max length of {maxlength} characters."
+      }
     }
   }
 }

@@ -20,9 +20,21 @@
     "email-label": "Email",
     "email-placeholder": "jan@nowak.pl",
     "email-description": "Pole obowiązkowe",
+    "password-label": "Hasło",
+    "password-placeholder": "wprowadź hasło",
+    "password-description": "Pole wymaga pomiędzy {minlength} a {maxlength} znaków.",
     "validation": {
-      "required": "Proszę wprowadzić email.",
-      "email": "Proszę wprowadzić poprawną konstrukcję email."
+      "email": {
+        "required": "Proszę wprowadzić email.",
+        "email": "Proszę wprowadzić poprawną konstrukcję email.",
+        "maxLength": "Pole '@:login.email-label' mieści do {maxlength} znaków."
+      },
+      "password": {
+        "required": "Proszę wprowadzić hasło.",
+        "password": "Nieprawidłowe hasło.",
+        "minLength": "Pole '@:login.password-label' mieści od {minlength} znaków.",
+        "maxLength": "Pole '@:login.password-label' mieści do {maxlength} znaków."
+      }
     }
   }
 }
