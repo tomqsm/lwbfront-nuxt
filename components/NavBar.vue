@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand to="/" type="light" tag="p">
+    <b-navbar-brand :to="$i18n.path('')" type="light" tag="p">
       <img
         src="/img/logo.svg"
         style="width: 30px; margin-right: 5px;"
@@ -27,12 +27,12 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown :text="$t('links.langlabel')" right>
           <NuxtLink
-            v-if="$i18n.locale === 'en'"
-            :to="`/pl` + $route.fullPath"
+            v-if="$i18n.locale === 'pl'"
+            :to="`/en` + $route.fullPath"
             active-class="none"
             exact
             tag="b-dropdown-item"
-            >{{ $t('links.polish') }}</NuxtLink
+            >{{ $t('links.english') }}</NuxtLink
           >
           <NuxtLink
             v-else
@@ -40,7 +40,7 @@
             active-class="none"
             exact
             tag="b-dropdown-item"
-            >{{ $t('links.english') }}</NuxtLink
+            >{{ $t('links.polish') }}</NuxtLink
           >
         </b-nav-item-dropdown>
       </b-navbar-nav>

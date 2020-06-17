@@ -69,7 +69,7 @@ export default {
     middleware: 'i18n'
   },
   generate: {
-    routes: ['/', '/about', '/pl', '/pl/about', '/login', '/pl/login']
+    routes: ['/', '/about', '/en', '/en/about', '/login', '/pl/login']
   },
   /* env usage: process.env.baseUrl */
   env: {
