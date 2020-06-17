@@ -25,7 +25,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#ff0000' },
+  loading: { color: '#7cfc00', throttle: 0, height: '4px' },
   /*
    ** Global CSS
    */
@@ -33,7 +33,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/i18n.js'],
+  plugins: ['~/plugins/i18n.js', '~/plugins/global-components.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -69,7 +69,7 @@ export default {
     middleware: 'i18n'
   },
   generate: {
-    routes: ['/', '/about', '/pl', '/pl/about']
+    routes: ['/', '/about', '/pl', '/pl/about', '/login', '/pl/login']
   },
   /* env usage: process.env.baseUrl */
   env: {

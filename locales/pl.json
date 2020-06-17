@@ -1,16 +1,28 @@
 {
   "links": {
-    "home": "Początek",
+    "home": "Start",
     "about": "Info",
-    "english": "English",
-    "polish": "Polski"
+    "login": "Logowanie",
+    "english": "English version",
+    "polish": "Polish version",
+    "langlabel": "Version"
   },
   "home": {
-    "title": "Bienvenue",
-    "introduction": "Ceci est un texte d'introduction en Français."
+    "title": "Witamy",
+    "introduction": "To jest wprowadzenie po polsku"
   },
   "about": {
-    "title": "À propos",
-    "introduction": "Cette page est faite pour vous donner plus d'informations."
+    "title": "Info",
+    "introduction": "To jest info po polsku."
+  },
+  "login": {
+    "title": "Logowanie",
+    "email-label": "Email",
+    "email-placeholder": "jan@nowak.pl",
+    "email-description": "Pole obowiązkowe",
+    "validation": {
+      "required": "Proszę wprowadzić email.",
+      "email": "Proszę wprowadzić poprawną konstrukcję email."
+    }
   }
 }

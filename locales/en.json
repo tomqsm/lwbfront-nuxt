@@ -2,8 +2,10 @@
   "links": {
     "home": "Home",
     "about": "About",
-    "english": "English version",
-    "polish": "Polish version"
+    "login": "Login",
+    "english": "Wersja angielska",
+    "polish": "Wersja polska",
+    "langlabel": "Version"
   },
   "home": {
     "title": "Welcome",
@@ -12,5 +14,15 @@
   "about": {
     "title": "About",
     "introduction": "This page is made to give you more informations."
+  },
+  "login": {
+    "title": "Login",
+    "email-label": "Email",
+    "email-placeholder": "email",
+    "email-description": "Required",
+    "validation": {
+      "required": "This field is required.",
+      "email": "Please enter a valid email address."
+    }
   }
 }

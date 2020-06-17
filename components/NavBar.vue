@@ -1,71 +1,60 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" type="light" variant="light">
-      <b-navbar-brand to="/" class type="light">
-        <img
-          src="/img/logo.svg"
-          style="width: 30px; margin-right: 5px;"
-          alt="logo"
-        />letsweb.biz
-      </b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+  <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar-brand to="/" type="light" tag="p">
+      <img
+        src="/img/logo.svg"
+        style="width: 30px; margin-right: 5px;"
+        alt="logo"
+      /><span>letsweb.biz</span>
+    </b-navbar-brand>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <router-link
-            tag="b-nav-item"
-            :to="{ name: 'Home' }"
-            active-class="active"
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav class="text-white">
+        <NuxtLink :to="$i18n.path('')" tag="b-nav-item" exact>{{
+          $t('links.home')
+        }}</NuxtLink>
+        <NuxtLink :to="$i18n.path('about')" tag="b-nav-item" exact>{{
+          $t('links.about')
+        }}</NuxtLink>
+        <NuxtLink :to="$i18n.path('login')" tag="b-nav-item" exact>
+          {{ $t('links.login') }}
+        </NuxtLink>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item-dropdown :text="$t('links.langlabel')" right>
+          <NuxtLink
+            v-if="$i18n.locale === 'en'"
+            :to="`/pl` + $route.fullPath"
+            active-class="none"
             exact
-            >{{ this.$t('homePage.title') }}</router-link
-          >
-          <router-link
-            tag="b-nav-item"
-            :to="{ name: 'About' }"
-            active-class="active"
-            >{{ this.$t('aboutPage.title') }}</router-link
-          >
-          <!-- <router-link tag="b-nav-item" :to="{name: 'Users'}" active-class="active">Users</router-link> -->
-          <router-link
-            v-if="isAuthenticated"
-            tag="b-nav-item"
-            :to="{ name: 'Dashboard' }"
-            active-class="active"
-            >Dashboard</router-link
-          >
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown v-if="false && !isAuthenticated" right>
-            <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
-              <em>User</em>
-            </template>
-
-            <router-link
-              v-if="!isAuthenticated"
-              tag="b-dropdown-item"
-              :to="{ name: 'SignUp' }"
-              >SignUp</router-link
-            >
-          </b-nav-item-dropdown>
-          <router-link
-            v-if="!isAuthenticated"
             tag="b-dropdown-item"
-            :to="{ name: 'signin' }"
-            active-class="active"
-            >{{ this.$t('signin.title') }}</router-link
+            >{{ $t('links.polish') }}</NuxtLink
           >
-          <span id="authenticatedUserAvatar">
-            <b-avatar v-if="isAuthenticated"></b-avatar>
-          </span>
-          <b-tooltip target="authenticatedUserAvatar">{{ authUser }}</b-tooltip>
-          <b-nav-item v-if="isAuthenticated" @click="logout">Logout</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+          <NuxtLink
+            v-else
+            :to="$route.fullPath.replace(/^\/[^\/]+/, '')"
+            active-class="none"
+            exact
+            tag="b-dropdown-item"
+            >{{ $t('links.english') }}</NuxtLink
+          >
+        </b-nav-item-dropdown>
+
+        <b-nav-item-dropdown right>
+          <!-- Using 'button-content' slot -->
+          <template v-slot:button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>
@@ -80,7 +69,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log('trying to logout')
       this.$store.dispatch('logout')
     }
   }
@@ -88,8 +76,11 @@ export default {
 </script>
 
 <style scoped>
-.active {
-  text-decoration: overline;
-  font-weight: bolder;
+.nav-item {
+  font-size: 1.2em;
+}
+.nav-item.nuxt-link-exact-active {
+  font-size: 1.2em;
+  text-decoration: underline;
 }
 </style>
