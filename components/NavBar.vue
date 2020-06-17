@@ -18,9 +18,6 @@
         <NuxtLink :to="$i18n.path('about')" tag="b-nav-item" exact>{{
           $t('links.about')
         }}</NuxtLink>
-        <NuxtLink :to="$i18n.path('login')" tag="b-nav-item" exact>
-          {{ $t('links.login') }}
-        </NuxtLink>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -43,6 +40,9 @@
             >{{ $t('links.polish') }}</NuxtLink
           >
         </b-nav-item-dropdown>
+        <NuxtLink :to="$i18n.path('login')" tag="b-nav-item" exact>
+          {{ $t('links.login') }}
+        </NuxtLink>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

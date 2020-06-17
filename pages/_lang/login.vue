@@ -8,7 +8,7 @@
 <script>
 export default {
   head() {
-    return { title: this.$t('login.title') }
+    return { title: 'letsweb.biz - ' + this.$t('login.title') }
   }
 }
 </script>

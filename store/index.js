@@ -1,6 +1,6 @@
 export const state = () => ({
   locales: ['en', 'pl'],
-  locale: 'en'
+  locale: 'pl'
 })
 
 export const mutations = {

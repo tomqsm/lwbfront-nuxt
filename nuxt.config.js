@@ -11,7 +11,8 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content:
+          'Systemy webowe programowane w najnowszych technologiach, skrojone ma miarę potrzeb biznesowych funkcjonalnie i wydajnie.'
       }
     ],
     link: [

@@ -8,21 +8,25 @@
     "langlabel": "Version"
   },
   "home": {
-    "title": "Witamy",
-    "introduction": "To jest wprowadzenie po polsku"
+    "title": "Start",
+    "introduction": "Prowadząc jakąkolwiek działaność wymagamy organizacji, kategoryzacji i konsekwencji. Często system informatyczny, który zintegruje się ze źródłami danych dostępnymi publicznie lub w innych firmach pobierając, przetwarzając i analizując je będzie w stanie załatwiać automatycznie sprawy, podejmować decyzje, które inaczej załatwiane ręcznie zajmują więcej czasu lub są podatne na błędy. Pojawiam się w miejscu, kiedy wydaje Ci się, że Twoje strona internetowa powinna służyć do czegoś więcej niż pokazywania statycznej treści."
   },
   "about": {
     "title": "Info",
-    "introduction": "To jest info po polsku."
+    "introduction": "To jest info po polsku.",
+    "intro": "<b>letsweb.biz - Tomasz Kuśmierczyk</b> indywidualna działalność gospodarcza. ",
+    "nip": "<b>NIP</b> 8641620172",
+    "badgeImageLabel": "LinedIn profile link."
   },
   "login": {
     "title": "Logowanie",
+    "disclaimer": "Dostępne dla klientów przyjętych zleceń projektowych.",
     "email-label": "Email",
     "email-placeholder": "jan@nowak.pl",
     "email-description": "Pole obowiązkowe",
     "password-label": "Hasło",
     "password-placeholder": "wprowadź hasło",
-    "password-description": "Pole wymaga pomiędzy {minlength} a {maxlength} znaków.",
+    "password-description": "Proszę wprowadzić od {minlength} do {maxlength} znaków.",
     "validation": {
       "email": {
         "required": "Proszę wprowadzić email.",

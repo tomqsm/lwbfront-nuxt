@@ -4,13 +4,14 @@
       {{ $t('home.title') }}
     </h1>
     <p>{{ $t('home.introduction') }}</p>
+    <HomeTabs />
   </div>
 </template>
 
 <script>
 export default {
   head() {
-    return { title: this.$t('home.title') }
+    return { title: 'letsweb.biz - ' + this.$t('home.title') }
   }
 }
 </script>

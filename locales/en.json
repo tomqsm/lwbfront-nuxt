@@ -13,10 +13,13 @@
   },
   "about": {
     "title": "About",
-    "introduction": "This page is made to give you more informations."
+    "introduction": "This page is made to give you more informations.",
+    "intro": "<b>letsweb.biz - Tomasz Kuśmierczyk</b> self-employment and freelanced consulting",
+    "nip": "<b>Tax Identification Number</b> PL8641620172"
   },
   "login": {
     "title": "Login",
+    "disclaimer": "Available for pre-registered clients.",
     "email-label": "Email",
     "email-placeholder": "e.g. john@smith.uk",
     "email-description": "Required",
