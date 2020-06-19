@@ -9,7 +9,9 @@
   },
   "home": {
     "title": "Start",
-    "introduction": "Prowadząc jakąkolwiek działaność wymagamy organizacji, kategoryzacji i konsekwencji. Często system informatyczny, który zintegruje się ze źródłami danych dostępnymi publicznie lub w innych firmach pobierając, przetwarzając i analizując je będzie w stanie załatwiać automatycznie sprawy, podejmować decyzje, które inaczej załatwiane ręcznie zajmują więcej czasu lub są podatne na błędy. Pojawiam się w miejscu, kiedy wydaje Ci się, że Twoje strona internetowa powinna służyć do czegoś więcej niż pokazywania statycznej treści."
+    "introduction": "Prowadząc jakąkolwiek działaność wymagamy organizacji, kategoryzacji i konsekwencji. Często system informatyczny, który zintegruje się ze źródłami danych dostępnymi publicznie lub w innych firmach pobierając, przetwarzając i analizując je będzie w stanie załatwiać automatycznie sprawy, podejmować decyzje, które inaczej załatwiane ręcznie zajmują więcej czasu lub są podatne na błędy. Pojawiam się w miejscu, kiedy wydaje Ci się, że Twoje strona internetowa powinna służyć do czegoś więcej niż pokazywania statycznej treści.",
+    "tab1":  "Systemy webowe",
+    "tab2": "Systemy backendowe"
   },
   "about": {
     "title": "Info",

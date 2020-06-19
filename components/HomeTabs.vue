@@ -2,7 +2,7 @@
   <b-tabs content-class="mt-3" fill card>
     <b-tab title="Systemy webowe" active>
       <b-card
-        title="$t('carousel.slide1.caption')"
+        :title="$t('home.tab1')"
         img-src="https://picsum.photos/600/300/?image=20"
         img-alt="Image"
         img-top
@@ -13,9 +13,9 @@
         <b-card-text>Systemy webowe</b-card-text>
       </b-card></b-tab
     >
-    <b-tab title="Systemy back-end'owe"
+    <b-tab :title="$t('home.tab2')"
       ><b-card
-        :title="$t('carousel.slide2.caption')"
+        :title="$t('home.tab2')"
         img-src="https://picsum.photos/600/300/?image=9"
         img-alt="Image"
         img-top
@@ -23,7 +23,7 @@
         style="max-width: 20rem;"
         class="mb-2"
       >
-        <b-card-text>{{ this.$t('carousel.slide2.text1') }}</b-card-text>
+        <b-card-text>Systemy backendowe</b-card-text>
       </b-card></b-tab
     >
   </b-tabs>

@@ -1,3 +1,5 @@
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const bodyParser = require('body-parser')
 export default {
   mode: 'universal',
   /*
@@ -75,5 +77,7 @@ export default {
   /* env usage: process.env.baseUrl */
   env: {
     baseUrl: process.env.BASE_URL || 'https://firebase/link'
-  }
+  },
+
+  serverMiddleware: [bodyParser.json(), '~/api']
 }

@@ -9,7 +9,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  mounted() {
+    console.log('mounted')
+    axios
+      .post('http://localhost:3000/api/track', { data: 'umba' })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => console.log(error))
+  },
   head() {
     return { title: 'letsweb.biz - ' + this.$t('home.title') }
   }
