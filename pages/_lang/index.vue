@@ -14,7 +14,7 @@ export default {
   mounted() {
     console.log('mounted')
     axios
-      .post('http://localhost:3000/api/track', { data: 'umba' })
+      .post('https://lwb-system.ew.r.appspot.com/api/track', { data: 'umba' })
       .then((res) => {
         console.log(res)
       })
