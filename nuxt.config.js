@@ -17,13 +17,7 @@ export default {
           'Systemy webowe programowane w najnowszych technologiach, skrojone ma miarę potrzeb biznesowych funkcjonalnie i wydajnie.'
       }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Roboto'
-      }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Customize the progress-bar color
