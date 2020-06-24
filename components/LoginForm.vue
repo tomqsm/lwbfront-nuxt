@@ -16,7 +16,7 @@
               type="email"
               :placeholder="$t('login.email-placeholder')"
               :state="validateState('email')"
-              @blur="validationTouch('email')"
+              @keyup="validationTouch('email')"
             ></b-form-input>
             <b-form-invalid-feedback :state="$v.form.email.$error">
               <span v-if="!$v.form.email.email">{{
@@ -49,7 +49,7 @@
               type="password"
               :placeholder="$t('login.password-placeholder')"
               :state="validateState('password')"
-              @blur="validationTouch('password')"
+              @keyup="validationTouch('password')"
             ></b-form-input>
             <b-form-invalid-feedback :state="$v.form.password.$error">
               <span v-if="!$v.form.password.required && testRequiredPassword">
@@ -76,14 +76,15 @@
               </i18n>
             </b-form-invalid-feedback>
           </b-form-group>
-
-          <b-button
-            :disabled="$v.$invalid"
-            type="submit"
-            variant="outline-primary"
-            >Submit</b-button
-          >
-          <b-button type="reset" variant="danger">Reset</b-button>
+          <div class="buttons mt-4">
+            <b-button
+              :disabled="$v.$invalid"
+              type="submit"
+              variant="outline-primary"
+              >Submit</b-button
+            >
+            <b-button type="reset" variant="danger">Reset</b-button>
+          </div>
         </b-form>
         <b-card v-if="false" class="mt-3" header="Form Data Result">
           <pre class="m-0">{{ form }}</pre>
@@ -138,15 +139,10 @@ export default {
       return $dirty ? !$error : null
     },
     validationTouch(name) {
-      const { $touch, $model } = this.$v.form[name]
+      const { $touch } = this.$v.form[name]
       if (name === 'email') {
         this.testRequiredEmail = true
-      } else if (
-        name === 'password' &&
-        $model &&
-        $model.toString().length >
-          0 /* helps to skip error mesges when you enter the field and then press reset */
-      ) {
+      } else if (name === 'password') {
         this.testRequiredPassword = true
       }
       $touch()

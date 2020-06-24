@@ -4,7 +4,7 @@
       <img
         src="/img/logo.svg"
         style="width: 30px; margin-right: 5px;"
-        alt="logo"
+        alt="logo letsweb.biz"
       /><span>letsweb.biz</span>
     </b-navbar-brand>
 

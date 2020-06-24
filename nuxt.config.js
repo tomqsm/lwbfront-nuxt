@@ -77,7 +77,8 @@ export default {
   },
   /* env usage: process.env.baseUrl */
   env: {
-    baseUrl: process.env.BASE_URL || 'https://firebase/link'
+    signin:
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
   },
 
   serverMiddleware: [bodyParser.json(), '~/api']
