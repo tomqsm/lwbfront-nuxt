@@ -122,7 +122,9 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      alert(
+        JSON.stringify(this.form) + ' ' + process.env.VUE_APP_FIREBASE_API_KEY
+      )
     },
     onReset(evt) {
       evt.preventDefault()

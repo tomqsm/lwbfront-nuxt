@@ -1,5 +1,10 @@
 // eslint-disable-next-line nuxt/no-cjs-in-config
 const bodyParser = require('body-parser')
+
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const env = require('./config')
+
+console.log(env)
 export default {
   mode: 'universal',
   /*
@@ -30,7 +35,14 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/i18n.js', '~/plugins/global-components.js'],
+  plugins: [
+    '~/plugins/i18n.js',
+    '~/plugins/global-components.js',
+    '~/plugins/today.client.js',
+    '~/plugins/guard.client.js',
+    '~/plugins/guard.server.js',
+    '~/plugins/hostname.server.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -51,7 +63,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: { baseUrl: process.env.baseUrl },
   /*
    ** Build configuration
    */
@@ -70,16 +82,13 @@ export default {
   },
 
   router: {
-    middleware: 'i18n'
+    middleware: ['i18n']
   },
   generate: {
     routes: ['/', '/about', '/en', '/en/about', '/login', '/pl/login']
   },
   /* env usage: process.env.baseUrl */
-  env: {
-    signin:
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
-  },
+  env: env.default.parsed,
 
   serverMiddleware: [bodyParser.json(), '~/api']
 }
