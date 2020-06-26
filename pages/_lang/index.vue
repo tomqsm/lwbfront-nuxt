@@ -9,11 +9,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   mounted() {
-    console.log('mounted')
-    axios
+    this.$axios
       .post('https://lwb-system.ew.r.appspot.com/api/track', { data: 'umba' })
       .then((res) => {
         console.log(res)
