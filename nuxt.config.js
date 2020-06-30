@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 // eslint-disable-next-line nuxt/no-cjs-in-config
 const env = require('./config')
 
-console.log(env)
 export default {
   mode: 'universal',
   /*
@@ -57,7 +56,8 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/firebase'
   ],
   /*
    ** Axios module configuration
@@ -90,5 +90,57 @@ export default {
   /* env usage: process.env.baseUrl */
   env: env.default.parsed,
 
-  serverMiddleware: [bodyParser.json(), '~/api']
+  serverMiddleware: [bodyParser.json(), '~/api'],
+
+  // Nuxt-Fire Module Options
+  firebase: {
+    config: {
+      apiKey: process.env.apiKey,
+      authDomain: process.env.authDomain,
+      databaseURL: process.env.databaseURL,
+      projectId: process.env.projectId,
+      storageBucket: process.env.storageBucket,
+      messagingSenderId: process.env.messagingSenderId,
+      appId: process.env.appId,
+      measurementId: process.env.measurementId
+    },
+    onFirebaseHosting: false,
+    services: {
+      auth: {
+        initialize: {
+          onAuthStateChangedMutation: 'users/ON_AUTH_STATE_CHANGED_MUTATION'
+        },
+        ssr: true
+      },
+      firestore: {
+        memoryOnly: false,
+        static: false
+      },
+      functions: {
+        // emulatorPort: 12345
+      },
+      storage: true,
+      realtimeDb: true,
+      performance: true,
+      analytics: true,
+      remoteConfig: {
+        settings: {
+          fetchTimeoutMillis: 60000,
+          minimumFetchIntervalMillis: 43200000
+        },
+        defaultConfig: {
+          welcome_message: 'Welcome'
+        }
+      },
+      messaging: {
+        createServiceWorker: true,
+        actions: [
+          {
+            action: 'goToUrl',
+            url: 'https://github.com/lupas'
+          }
+        ]
+      }
+    }
+  }
 }

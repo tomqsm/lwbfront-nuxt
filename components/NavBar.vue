@@ -18,7 +18,9 @@
         <NuxtLink :to="$i18n.path('about')" tag="b-nav-item" exact>{{
           $t('links.about')
         }}</NuxtLink
-        ><NuxtLink to="/admin" tag="b-nav-item" exact>Admin</NuxtLink>
+        ><NuxtLink :to="$i18n.path('admin')" tag="b-nav-item" exact>{{
+          $t('links.admin')
+        }}</NuxtLink>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

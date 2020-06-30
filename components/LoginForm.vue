@@ -1,6 +1,8 @@
 <template>
   <b-container fluid class="bv-example-row">
-    <b-row><p v-t="'login.disclaimer'"></p></b-row>
+    <b-row>
+      <p v-t="'login.disclaimer'"></p>
+    </b-row>
     <b-row>
       <b-col md="6" offset-md="3">
         <b-form novalidate @submit="onSubmit" @reset="onReset">
@@ -12,27 +14,27 @@
           >
             <b-form-input
               id="form-email"
-              v-model.trim="form.email"
+              v-model.trim="email"
               type="email"
               :placeholder="$t('login.email-placeholder')"
               :state="validateState('email')"
               @keyup="validationTouch('email')"
             ></b-form-input>
-            <b-form-invalid-feedback :state="$v.form.email.$error">
-              <span v-if="!$v.form.email.email">{{
-                $t('login.validation.email.email')
-              }}</span>
-              <span v-if="!$v.form.email.required && testRequiredEmail">
-                {{ $t('login.validation.email.required') }}
+            <b-form-invalid-feedback :state="$v.email.$error">
+              <span v-if="!$v.email.email">
+                {{ $t('login.validation.email.email') }}
               </span>
+              <span v-if="!$v.email.required && testRequiredEmail">{{
+                $t('login.validation.email.required')
+              }}</span>
               <i18n
-                v-if="!$v.form.email.maxLength"
+                v-if="!$v.email.maxLength"
                 path="login.validation.email.maxLength"
                 tag="span"
               >
-                <template #maxlength>{{
-                  $v.form.email.$params.maxLength.max
-                }}</template>
+                <template #maxlength>
+                  {{ $v.email.$params.maxLength.max }}
+                </template>
               </i18n>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -41,38 +43,37 @@
             id="input-group-2"
             :label="$t('login.password-label')"
             label-for="form-password"
-            :description="passwordDescription"
           >
             <b-form-input
               id="form-password"
-              v-model.trim="form.password"
+              v-model.trim="password"
               type="password"
               :placeholder="$t('login.password-placeholder')"
               :state="validateState('password')"
               @keyup="validationTouch('password')"
             ></b-form-input>
-            <b-form-invalid-feedback :state="$v.form.password.$error">
-              <span v-if="!$v.form.password.required && testRequiredPassword">
-                {{ $t('login.validation.password.required') }}
-              </span>
+            <b-form-invalid-feedback :state="$v.password.$error">
+              <span v-if="!$v.password.required && testRequiredPassword">{{
+                $t('login.validation.password.required')
+              }}</span>
               <span
-                v-if="!$v.form.password.minLength"
+                v-if="!$v.password.minLength"
                 v-t="{
                   path: 'login.validation.password.minLength',
                   args: {
-                    minlength: $v.form.password.$params.minLength.min
+                    minlength: $v.password.$params.minLength.min
                   }
                 }"
               ></span>
 
               <i18n
-                v-if="!$v.form.password.maxLength"
+                v-if="!$v.password.maxLength"
                 path="login.validation.password.maxLength"
                 tag="span"
               >
-                <template #maxlength>{{
-                  $v.form.password.$params.maxLength.max
-                }}</template>
+                <template #maxlength>
+                  {{ $v.password.$params.maxLength.max }}
+                </template>
               </i18n>
             </b-form-invalid-feedback>
           </b-form-group>
@@ -102,34 +103,45 @@ export default {
   data() {
     return {
       testRequiredEmail: false,
-      testRequiredPassword: false,
-      form: {
-        email: '',
-        password: '',
-        food: null,
-        checked: []
-      }
+      testRequiredPassword: false
     }
   },
   computed: {
-    passwordDescription() {
-      return this.$t('login.password-description', {
-        minlength: this.$v.form.password.$params.minLength.min,
-        maxlength: this.$v.form.password.$params.maxLength.max
-      })
+    email: {
+      get() {
+        return this.$store.state.users.email
+      },
+      set(value) {
+        this.$store.commit('users/updateEmail', value)
+      }
+    },
+    password: {
+      get() {
+        return this.$store.state.users.password
+      },
+      set(value) {
+        this.$store.commit('users/updatePassword', value)
+      }
     }
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
-      alert(
-        JSON.stringify(this.form) + ' ' + process.env.VUE_APP_FIREBASE_API_KEY
-      )
+      this.$store
+        .dispatch('users/signInWithEmailAndPassword', {
+          email: this.email,
+          password: this.password
+        })
+        .then((u) => {
+          this.$store.commit('users/setUser', u, { module: 'users' })
+          // redirect('301', '/' + locales[0] + route.fullPath)
+        })
+        .catch((e) => console.log(e))
     },
     onReset(evt) {
       evt.preventDefault()
-      this.form.email = ''
-      this.form.password = ''
+      this.email = ''
+      this.password = ''
       this.testRequiredEmail = false
       this.testRequiredPassword = false
       this.$nextTick(() => {
@@ -137,11 +149,11 @@ export default {
       })
     },
     validateState(name) {
-      const { $dirty, $error } = this.$v.form[name]
+      const { $dirty, $error } = this.$v[name]
       return $dirty ? !$error : null
     },
     validationTouch(name) {
-      const { $touch } = this.$v.form[name]
+      const { $touch } = this.$v[name]
       if (name === 'email') {
         this.testRequiredEmail = true
       } else if (name === 'password') {
@@ -151,17 +163,15 @@ export default {
     }
   },
   validations: {
-    form: {
-      email: {
-        email,
-        required,
-        maxLength: maxLength(50)
-      },
-      password: {
-        required,
-        minLength: minLength(6),
-        maxLength: maxLength(16)
-      }
+    email: {
+      email,
+      required,
+      maxLength: maxLength(50)
+    },
+    password: {
+      required,
+      minLength: minLength(6),
+      maxLength: maxLength(16)
     }
   }
 }
