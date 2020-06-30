@@ -107,10 +107,13 @@ export default {
     onFirebaseHosting: false,
     services: {
       auth: {
+        persistence: 'local',
         initialize: {
           onAuthStateChangedMutation: 'users/ON_AUTH_STATE_CHANGED_MUTATION'
         },
-        ssr: true
+        ssr: {
+          ignorePaths: [/^admin\//, /^about\//]
+        }
       },
       firestore: {
         memoryOnly: false,

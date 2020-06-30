@@ -12,14 +12,28 @@ export const mutations = {
     state.password = password
   },
   setUser(state, data) {
-    const { uid, email, emailVerified, refreshToken } = data
-    state.user = { uid, email, emailVerified, refreshToken }
+    if (data) {
+      const { uid, email, emailVerified, refreshToken } = data
+      state.user = { uid, email, emailVerified, refreshToken }
+    } else {
+      state.user = data
+    }
   },
   ON_AUTH_STATE_CHANGED_MUTATION: (state, { authUser, claims }) => {
-    const { uid, email, emailVerified, refreshToken } = authUser
-    // eslint-disable-next-line camelcase
-    const { auth_time, exp } = claims
-    state.user = { uid, email, emailVerified, refreshToken, auth_time, exp }
+    if (authUser && claims) {
+      const { uid, email, emailVerified, refreshToken, xa } = authUser
+      // eslint-disable-next-line camelcase
+      const { auth_time, exp } = claims
+      state.user = {
+        uid,
+        email,
+        emailVerified,
+        refreshToken,
+        auth_time,
+        exp,
+        xa
+      }
+    }
   }
 }
 
@@ -42,12 +56,30 @@ export const actions = {
         .signInWithEmailAndPassword(data.email, data.password)
         .then((data) => {
           resolve(data)
-          // commit('updatePassword', '')
-          // commit('updateEmail', '')
         })
         .catch((error) => {
           reject(error)
         })
     })
+  },
+  logout({ commit, state }) {
+    if (state.user) {
+      this.$axios
+        .$post(
+          'https://europe-west3-lwb-system.cloudfunctions.net/rest-widgets/api/signout',
+          { uid: state.user.uid },
+          {
+            headers: {
+              Authorization: `Bearer ${state.user.xa}`
+            }
+          }
+        )
+        .then((result) => {
+          commit('setUser', null)
+        })
+        .catch((e) => {
+          console.error('Invalid token revication.', e)
+        })
+    }
   }
 }

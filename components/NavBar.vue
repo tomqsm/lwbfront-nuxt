@@ -43,9 +43,15 @@
             >{{ $t('links.polish') }}</NuxtLink
           >
         </b-nav-item-dropdown>
-        <NuxtLink :to="$i18n.path('login')" tag="b-nav-item" exact>
+        <NuxtLink
+          v-if="!isAuthenticated"
+          :to="$i18n.path('login')"
+          tag="b-nav-item"
+          exact
+        >
           {{ $t('links.login') }}
         </NuxtLink>
+        <b-nav-item v-if="isAuthenticated" @click="logout()">Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -55,7 +61,7 @@
 export default {
   computed: {
     isAuthenticated() {
-      return this.$store.getters.isAuthenticated
+      return this.$store.getters['users/getUser']
     },
     authUser() {
       return this.$store.getters.authUser
@@ -63,7 +69,16 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
+      this.$store
+        .dispatch('users/getDb')
+        .then((u) => {
+          console.log(u)
+        })
+        .catch((e) => console.log(e))
+      this.$store.dispatch('users/logout')
+      this.$fireAuthUnsubscribe()
+      localStorage.clear()
+      this.$router.push('/')
     }
   }
 }
