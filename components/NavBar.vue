@@ -51,7 +51,7 @@
         >
           {{ $t('links.login') }}
         </NuxtLink>
-        <b-nav-item v-if="isAuthenticated" @click="logout()">Logout</b-nav-item>
+        <b-nav-item v-else @click="logout()">Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -64,17 +64,11 @@ export default {
       return this.$store.getters['users/getUser']
     },
     authUser() {
-      return this.$store.getters.authUser
+      return this.$store.getters['users/getEmail']
     }
   },
   methods: {
     logout() {
-      this.$store
-        .dispatch('users/getDb')
-        .then((u) => {
-          console.log(u)
-        })
-        .catch((e) => console.log(e))
       this.$store.dispatch('users/logout')
       this.$fireAuthUnsubscribe()
       localStorage.clear()

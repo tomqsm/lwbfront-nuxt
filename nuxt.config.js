@@ -112,7 +112,7 @@ export default {
           onAuthStateChangedMutation: 'users/ON_AUTH_STATE_CHANGED_MUTATION'
         },
         ssr: {
-          ignorePaths: [/^admin\//, /^about\//]
+          ignorePaths: []
         }
       },
       firestore: {

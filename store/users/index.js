@@ -13,8 +13,12 @@ export const mutations = {
   },
   setUser(state, data) {
     if (data) {
-      const { uid, email, emailVerified, refreshToken } = data
-      state.user = { uid, email, emailVerified, refreshToken }
+      if (!state.user) {
+        state.user = {}
+      }
+      // xa is the jwt token needed for a logout
+      const { uid, email, emailVerified, refreshToken, xa } = data.user
+      state.user = { uid, email, emailVerified, refreshToken, xa }
     } else {
       state.user = data
     }
