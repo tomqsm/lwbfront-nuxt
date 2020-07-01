@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="dark">
+  <b-navbar shadow-sm toggleable="lg" type="dark" variant="dark">
     <b-navbar-brand :to="$i18n.path('')" type="light" tag="p">
       <img
         src="/img/logo.svg"

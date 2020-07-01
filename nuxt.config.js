@@ -125,7 +125,7 @@ export default {
       storage: true,
       realtimeDb: true,
       performance: true,
-      analytics: true,
+      analytics: false,
       remoteConfig: {
         settings: {
           fetchTimeoutMillis: 60000,
