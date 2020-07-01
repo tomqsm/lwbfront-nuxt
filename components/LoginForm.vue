@@ -112,7 +112,7 @@ export default {
         return this.$store.state.users.email
       },
       set(value) {
-        this.$store.commit('users/updateEmail', value)
+        this.$store.commit('users/setEmail', value)
       }
     },
     password: {
@@ -120,7 +120,7 @@ export default {
         return this.$store.state.users.password
       },
       set(value) {
-        this.$store.commit('users/updatePassword', value)
+        this.$store.commit('users/setPassword', value)
       }
     }
   },
@@ -132,9 +132,9 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then((u) => {
-          this.$store.commit('users/setUser', u, { module: 'users' })
-          // redirect('301', '/' + locales[0] + route.fullPath)
+        .then((user) => {
+          this.$store.commit('users/setUser', user, { module: 'users' })
+          this.$router.push(this.$i18n.path('admin'))
         })
         .catch((e) => console.log(e))
     },

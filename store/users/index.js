@@ -5,10 +5,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  updateEmail(state, email) {
+  setEmail(state, email) {
     state.email = email
   },
-  updatePassword(state, password) {
+  setPassword(state, password) {
     state.password = password
   },
   setUser(state, data) {
@@ -50,6 +50,9 @@ export const getters = {
   },
   getPassword: (state) => {
     return state.password
+  },
+  isAuthenticated: (state) => {
+    return state.user ? state.user.xa != null : false
   }
 }
 
@@ -80,9 +83,11 @@ export const actions = {
         )
         .then((result) => {
           commit('setUser', null)
+          commit('setEmail', null)
+          commit('setPassword', null)
         })
         .catch((e) => {
-          console.error('Invalid token revication.', e)
+          console.error('Invalid token revocation.', e)
         })
     }
   }
