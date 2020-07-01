@@ -31,6 +31,12 @@
           >{{ $t('links.login') }}</NuxtLink
         >
         <b-nav-item v-else @click="logout()">Logout</b-nav-item>
+        <b-spinner
+          v-show="showLogoutSpinner"
+          small
+          light
+          type="grow"
+        ></b-spinner>
 
         <NuxtLink
           v-if="$i18n.locale === 'pl'"
@@ -56,6 +62,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      showLogoutSpinner: false
+    }
+  },
   computed: {
     isAuthenticated() {
       return this.$store.getters['users/isAuthenticated']
@@ -66,10 +77,18 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch('users/logout')
-      this.$fireAuthUnsubscribe()
-      localStorage.clear()
-      this.$router.push(this.$i18n.path(''))
+      this.showLogoutSpinner = true
+      this.$store
+        .dispatch('users/logout')
+        .then((result) => {
+          this.$fireAuthUnsubscribe()
+          localStorage.clear()
+          this.showLogoutSpinner = false
+          this.$router.push(this.$i18n.path(''))
+        })
+        .catch((error) => {
+          console.error('Failed loging out', error)
+        })
     }
   }
 }

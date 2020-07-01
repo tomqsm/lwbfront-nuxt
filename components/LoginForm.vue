@@ -136,7 +136,9 @@ export default {
           this.$store.commit('users/setUser', user, { module: 'users' })
           this.$router.push(this.$i18n.path('admin'))
         })
-        .catch((e) => console.log(e))
+        .catch((e) =>
+          console.error('Faild to sign in with email and password.', e)
+        )
     },
     onReset(evt) {
       evt.preventDefault()

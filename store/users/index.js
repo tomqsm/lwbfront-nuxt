@@ -70,25 +70,29 @@ export const actions = {
     })
   },
   logout({ commit, state }) {
-    if (state.user) {
-      this.$axios
-        .$post(
-          'https://europe-west3-lwb-system.cloudfunctions.net/rest-widgets/api/signout',
-          { uid: state.user.uid },
-          {
-            headers: {
-              Authorization: `Bearer ${state.user.xa}`
+    return new Promise((resolve, reject) => {
+      if (state.user) {
+        this.$axios
+          .$post(
+            'https://europe-west3-lwb-system.cloudfunctions.net/rest-widgets/api/signout',
+            { uid: state.user.uid },
+            {
+              headers: {
+                Authorization: `Bearer ${state.user.xa}`
+              }
             }
-          }
-        )
-        .then((result) => {
-          commit('setUser', null)
-          commit('setEmail', null)
-          commit('setPassword', null)
-        })
-        .catch((e) => {
-          console.error('Invalid token revocation.', e)
-        })
-    }
+          )
+          .then((result) => {
+            commit('setUser', null)
+            commit('setEmail', null)
+            commit('setPassword', null)
+            resolve(result)
+          })
+          .catch((e) => {
+            console.error('Invalid token revocation.', e)
+            reject(e)
+          })
+      }
+    })
   }
 }
