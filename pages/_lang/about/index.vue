@@ -20,7 +20,6 @@
         </a>
       </b-col>
     </b-row>
-    <p>{{ getToday }}</p>
   </div>
 </template>
 
@@ -36,9 +35,6 @@ export default {
       return this.pagelocale === 'pl'
         ? '/img/linkedin-badge_pl-min.PNG'
         : '/img/linkedin-badge_en-min.PNG'
-    },
-    getToday() {
-      return this.$today
     }
   },
   head() {

@@ -37,9 +37,9 @@ export default {
   plugins: [
     '~/plugins/i18n.js',
     '~/plugins/global-components.js',
-    '~/plugins/today.client.js',
     '~/plugins/guard.client.js',
     '~/plugins/guard.server.js',
+    '~/plugins/date-filter.js',
     '~/plugins/hostname.server.js'
   ],
   /*

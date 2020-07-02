@@ -9,19 +9,15 @@
     <footer class="container LayoutDefaultFooter">
       <br />
       <hr />
-      <slot name="footer">&copy; letsweb.biz {{ currentYear }}</slot>
+      <slot name="footer"
+        >&copy; letsweb.biz | {{ lwbDateGenetivus(new Date(), this) }}
+      </slot>
     </footer>
   </div>
 </template>
 
 <script>
-export default {
-  computed: {
-    currentYear: () => {
-      return new Date().getFullYear()
-    }
-  }
-}
+export default {}
 </script>
 
 <style></style>
