@@ -124,7 +124,7 @@ export default {
       },
       storage: true,
       realtimeDb: true,
-      performance: true,
+      performance: false,
       analytics: false,
       remoteConfig: {
         settings: {
@@ -136,7 +136,7 @@ export default {
         }
       },
       messaging: {
-        createServiceWorker: true,
+        createServiceWorker: false,
         actions: [
           {
             action: 'goToUrl',

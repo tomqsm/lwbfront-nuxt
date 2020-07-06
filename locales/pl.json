@@ -42,6 +42,9 @@
         "minLength": "Pole '@:login.password-label' mieści od {minlength} znaków.",
         "maxLength": "Pole '@:login.password-label' mieści do {maxlength} znaków."
       }
-    }
+    },
+    "auth/user-not-found": "Użytkownik nie jest zarejestrowany.",
+    "auth/wrong-password": "Nieprawidłowe hasło.",
+    "auth/too-many-requests": "Za wiele błędnych prób logowania. Proszę spróbować później."
   }
 }

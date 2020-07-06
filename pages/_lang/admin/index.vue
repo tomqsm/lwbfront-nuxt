@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Admin</h1>
+    <BlogArticle></BlogArticle>
   </div>
 </template>
 

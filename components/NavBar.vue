@@ -30,7 +30,7 @@
           exact
           >{{ $t('links.login') }}</NuxtLink
         >
-        <b-nav-item v-else @click="logout()">Logout</b-nav-item>
+        <b-nav-item v-else id="logout" @click="logout()">Logout</b-nav-item>
         <b-spinner
           v-show="showLogoutSpinner"
           small
@@ -78,12 +78,15 @@ export default {
   methods: {
     logout() {
       this.showLogoutSpinner = true
+      this.$nuxt.$loading.rtl = true
+      this.$nuxt.$loading.start()
       this.$store
         .dispatch('users/logout')
         .then((result) => {
           this.$fireAuthUnsubscribe()
           localStorage.clear()
           this.showLogoutSpinner = false
+          this.$nuxt.$loading.finish()
           this.$router.push(this.$i18n.path(''))
         })
         .catch((error) => {

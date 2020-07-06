@@ -4,8 +4,11 @@ export default (context, inject) => {
   app.router.beforeEach((to, from, next) => {
     const isAuthenticated = store.getters['users/isAuthenticated']
     console.log(`is user authenticated: ${isAuthenticated}`)
-    if (!isAuthenticated && to.path.match(blockedRoute)) {
+    const isPathBlocked = to.path.match(blockedRoute)
+    if (!isAuthenticated && isPathBlocked) {
       redirect(`${store.getters.getLangPathPrefix}login`)
+    } else if (isAuthenticated && isPathBlocked && !to.query.id) {
+      next({ path: to.path, query: { id: store.getters['users/getUser'].xa } })
     } else {
       next()
     }

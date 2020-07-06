@@ -26,3 +26,21 @@ export const getters = {
     return result
   }
 }
+
+export const actions = {
+  nuxtServerInit({ commit, getters }, { req, res }) {
+    // console.log(req.headers.cookie)
+    // console.log(req.headers)
+    // console.log('req')
+    // console.log(req.query.id)
+    // console.log('res')
+    // console.log(res)
+    res.setHeader('myauth', 'application/json')
+    console.log("getters['users/user']")
+    console.log(getters['users/user'])
+    // res.writeHead(301, {
+    //   Location: 'http://whateverhostthiswillbe:8675/'
+    // })
+    // res.end()
+  }
+}

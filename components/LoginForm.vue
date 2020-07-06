@@ -79,6 +79,7 @@
           </b-form-group>
           <div class="buttons mt-4">
             <b-button
+              id="submit-button"
               :disabled="$v.$invalid"
               type="submit"
               variant="outline-primary"
@@ -92,6 +93,13 @@
         </b-card>
       </b-col>
     </b-row>
+    <span
+      v-if="loginError"
+      v-t="{
+        path: `login.${loginError.code}`
+      }"
+      class="text-danger"
+    ></span>
   </b-container>
 </template>
 
@@ -103,7 +111,8 @@ export default {
   data() {
     return {
       testRequiredEmail: false,
-      testRequiredPassword: false
+      testRequiredPassword: false,
+      loginError: null
     }
   },
   computed: {
@@ -136,9 +145,17 @@ export default {
           this.$store.commit('users/setUser', user, { module: 'users' })
           this.$router.push(this.$i18n.path('admin'))
         })
-        .catch((e) =>
-          console.error('Faild to sign in with email and password.', e)
-        )
+        .catch((e) => {
+          this.loginError = e
+          if (e.code === 'auth/user-not-found') {
+            this.email = ''
+          } else if (e.code === 'auth/wrong-password') {
+            this.password = ''
+          } else {
+            this.email = ''
+            this.password = ''
+          }
+        })
     },
     onReset(evt) {
       evt.preventDefault()

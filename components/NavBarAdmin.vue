@@ -51,7 +51,9 @@
         >
           {{ $t('links.login') }}
         </NuxtLink>
-        <b-nav-item v-else @click="logout()">Logout</b-nav-item>
+        <b-nav-item v-else id="logout-admin" @click="logout()"
+          >Logout</b-nav-item
+        >
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

@@ -20,6 +20,9 @@
         </a>
       </b-col>
     </b-row>
+    <keep-alive>
+      <BlogArticle />
+    </keep-alive>
   </div>
 </template>
 
