@@ -23,20 +23,27 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <NuxtLink
-          v-if="!isAuthenticated"
-          :to="$i18n.path('login')"
-          tag="b-nav-item"
-          exact
-          >{{ $t('links.login') }}</NuxtLink
-        >
-        <b-nav-item v-else id="logout" @click="logout()">Logout</b-nav-item>
-        <b-spinner
-          v-show="showLogoutSpinner"
-          small
-          light
-          type="grow"
-        ></b-spinner>
+        <template v-if="!isAuthenticated">
+          <NuxtLink
+            v-if="!isAuthenticated"
+            :to="$i18n.path('login')"
+            tag="b-nav-item"
+            exact
+            >{{ $t('links.login') }}</NuxtLink
+          >
+        </template>
+        <template v-else>
+          <NuxtLink :to="$i18n.path('admin')" tag="b-nav-item" exact>{{
+            $t('links.admin')
+          }}</NuxtLink>
+          <b-nav-item id="logout" @click="logout()">Logout</b-nav-item>
+          <b-spinner
+            v-show="showLogoutSpinner"
+            small
+            light
+            type="grow"
+          ></b-spinner>
+        </template>
 
         <NuxtLink
           v-if="$i18n.locale === 'pl'"

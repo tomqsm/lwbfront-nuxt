@@ -4,7 +4,7 @@
       {{ $t('home.title') }}
     </h1>
     <p>{{ $t('home.introduction') }}</p>
-    <HomeTabs />
+    <HomeCards />
   </div>
 </template>
 

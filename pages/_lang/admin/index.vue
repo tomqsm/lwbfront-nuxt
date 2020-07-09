@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  layout: 'admin',
+  layout: 'default',
   head() {
     return { title: 'letsweb.biz - admin' }
   }

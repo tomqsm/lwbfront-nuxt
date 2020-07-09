@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class="bv-example-row">
     <b-row>
-      <p v-t="'login.disclaimer'"></p>
+      <p id="login-disclaimer" v-t="'login.disclaimer'"></p>
     </b-row>
     <b-row>
       <b-col md="6" offset-md="3">

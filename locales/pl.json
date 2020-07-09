@@ -10,23 +10,30 @@
   },
   "home": {
     "title": "Start",
-    "introduction": "Prowadząc jakąkolwiek działaność wymagamy organizacji, kategoryzacji i konsekwencji. Często system informatyczny, który zintegruje się ze źródłami danych dostępnymi publicznie lub w innych firmach pobierając, przetwarzając i analizując je będzie w stanie załatwiać automatycznie sprawy, podejmować decyzje, które inaczej załatwiane ręcznie zajmują więcej czasu lub są podatne na błędy. Pojawiam się w miejscu, kiedy wydaje Ci się, że Twoje strona internetowa powinna służyć do czegoś więcej niż pokazywania statycznej treści.",
-    "tab1":  "Systemy webowe",
-    "tab2": "Systemy backendowe"
+    "introduction": "System informatyczny, integrujący się ze źródłami danych w domenie publicznej lub w innych firmach, przetwarza je, analizuje by automatycznie załatwiać sprawy, podejmować decyzje, które inaczej są czasochłonne lub podatne na błędy.",
+    "tab1":  "Wsparcie start-up'ów",
+    "tab1-text": "Obsługa startup'ów: własny adres internetowy (domena), strona internetowa, skrzynka e-mail wraz z zarządzaniem użytkownikami i dyskiem chmurowym w oparciu o infrastrukturę Google.",
+    "tab2": "Systemy backendowe",
+    "tab2-text": "Backend: Java > Spring, Cloud > GCP, Digitalocean. Fontend: Vuejs"
   },
   "about": {
     "title": "Info",
-    "introduction": "To jest info po polsku.",
-    "intro": "<b>letsweb.biz - Tomasz Kuśmierczyk</b> indywidualna działalność gospodarcza. ",
+    "introduction": "",
+    "intro": "<p>Java (Springboot, Javalin), Node.js, Test: JUnit, Cucumber, Devops: Cloud (Google, DigitalOcean), Docker, Kubernetes, Dane: Google NoSql-SQL, Oracle, H2, Stream: Kafka</p><b>letsweb.biz - Tomasz Kuśmierczyk</b> indywidualna działalność gospodarcza. ",
     "nip": "<b>NIP</b> 8641620172",
-    "badgeImageLabel": "LinedIn profile link."
+    "email": "website@letsweb.biz",
+    "badgeImageLabel": "LinedIn profile link.",
+    "kontakt": "Kontakt",
+    "otworzSkrzynke": "spróbuj otworzyć skrzynkę",
+    "pokazEmail": "pokaż e-mail",
+    "lub": "lub"
   },
   "login": {
     "title": "Logowanie",
     "disclaimer": "Dostępne dla klientów przyjętych zleceń projektowych.",
     "email-label": "Email",
     "email-placeholder": "jan@nowak.pl",
-    "email-description": "Pole obowiązkowe",
+    "email-description": "Dla zarejestrowanych adresów email",
     "password-label": "Hasło",
     "password-placeholder": "wprowadź hasło",
     "password-description": "Proszę wprowadzić od {minlength} do {maxlength} znaków.",

@@ -12,6 +12,19 @@
 <script>
 export default {
   fetchOnServer: false,
+  fetch() {
+    this.$fireStore
+      .collection('users')
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          this.articles.push({ id: doc.id, ...doc.data() })
+        })
+      })
+      .catch((e) => {
+        console.error(e)
+      })
+  },
   data() {
     return {
       articles: []
@@ -24,29 +37,6 @@ export default {
       console.log('OK fetch')
       this.$fetch() // this is when you click a button on somethin, as a lifecycle hook it ronns anyway
     }
-  },
-  fetch() {
-    // this.$axios
-    //   .$get('url')
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-    //   .catch((error) => {
-    //     console.error(error)
-    //   })
-    console.log('will get a blog post')
-    const ref = this.$fireStore.collection('users')
-
-    ref
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          this.articles.push(doc.id)
-        })
-      })
-      .catch((e) => {
-        console.error(e)
-      })
   }
 }
 </script>

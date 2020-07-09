@@ -10,13 +10,21 @@
   },
   "home": {
     "title": "Welcome",
-    "introduction": "This is an introduction in English."
+    "introduction": "Integrations with data available publicly and from private domain to process, analyse and launch downstream processes which otherwise were time-consuming and error prone.",
+    "tab1":  "Startup support",
+    "tab1-text": "Own internet address (domain), web site, e-mail box, user management, cloud storage in Google Cloud.",
+    "tab2": "Backend systems",
+    "tab2-text": "Backend: Java > Spring, Cloud > GCP, Digitalocean. Fontend: Vuejs"
   },
   "about": {
     "title": "About",
     "introduction": "This page is made to give you more informations.",
     "intro": "<b>letsweb.biz - Tomasz Kuśmierczyk</b> self-employment and freelanced consulting",
-    "nip": "<b>Tax Identification Number</b> PL8641620172"
+    "nip": "<b>Tax Identification Number</b> PL8641620172",
+    "kontakt": "Contact",
+    "otworzSkrzynke": "try to open email client",
+    "pokazEmail": "show e-mail",
+    "lub": "or"
   },
   "login": {
     "title": "Login",

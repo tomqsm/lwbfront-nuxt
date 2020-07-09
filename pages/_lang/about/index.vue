@@ -9,6 +9,18 @@
           <span v-html="$t('about.intro')"></span>
         </p>
         <p v-html="$t('about.nip')"></p>
+        <p class="float-left">
+          <b>{{ $t('about.kontakt') }}:</b>&nbsp;
+        </p>
+        <b-link v-if="!showEmail" href="" @click="showEmail = !showEmail">
+          {{ $t('about.pokazEmail') }}
+        </b-link>
+        <p v-else>
+          website@letsweb.biz {{ $t('about.lub') }}
+          <a href="mailto:website@letsweb.biz">{{
+            $t('about.otworzSkrzynke')
+          }}</a>
+        </p>
       </b-col>
       <b-col>
         <a
@@ -20,9 +32,6 @@
         </a>
       </b-col>
     </b-row>
-    <keep-alive>
-      <BlogArticle />
-    </keep-alive>
   </div>
 </template>
 
@@ -30,7 +39,8 @@
 export default {
   data() {
     return {
-      pagelocale: this.$i18n.locale
+      pagelocale: this.$i18n.locale,
+      showEmail: false
     }
   },
   computed: {
@@ -40,6 +50,7 @@ export default {
         : '/img/linkedin-badge_en-min.PNG'
     }
   },
+  methods: {},
   head() {
     return { title: 'letsweb.biz - ' + this.$t('about.title') }
   }
