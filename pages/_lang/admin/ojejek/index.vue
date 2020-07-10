@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h1>Admin</h1>
-    <nuxt-link to="/admin/ojejek">ojejek</nuxt-link>
+    <h1>Ojejek</h1>
+    <Geolocation />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   layout: 'default',
   head() {
-    return { title: 'letsweb.biz - admin' }
+    return { title: 'letsweb.biz - ojejek' }
   }
 }
 </script>

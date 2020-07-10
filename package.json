@@ -23,10 +23,10 @@
     "nuxt": "^2.0.0",
     "vue-i18n": "^8.18.2",
     "vuelidate": "^0.7.5",
+    "dotenv": "^8.2.0",
     "vuex-map-fields": "^1.4.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
