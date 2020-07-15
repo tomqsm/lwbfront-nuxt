@@ -68,6 +68,7 @@ export default {
    ** Build configuration
    */
   build: {
+    // transpile: ['x5-gmaps'],
     /*
      ** You can extend webpack config here
      */

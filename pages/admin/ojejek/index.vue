@@ -1,4 +1,4 @@
 <script>
-import Admin from '~/pages/_lang/admin/ojejek'
-export default Admin
+import Ojejek from '~/pages/_lang/admin/ojejek'
+export default Ojejek
 </script>

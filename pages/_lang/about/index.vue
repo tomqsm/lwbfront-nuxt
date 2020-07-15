@@ -30,6 +30,12 @@
         >
           <img :src="badgeImage" :alt="$t('about.badgeImageLabel')" />
         </a>
+        <keep-alive>
+          <GoogleMap
+            :center="{ lat: 52.211148538597904, lng: 21.711489989869552 }"
+            :markers="[{ lat: 52.811148538597904, lng: 21.711489989869552 }]"
+          />
+        </keep-alive>
       </b-col>
     </b-row>
   </div>
