@@ -6,12 +6,13 @@
 
 <script>
 import LwbMap from '@/components/LwbMap'
+
 export default {
+  components: { LwbMap },
   props: {
     center: Object,
     markers: Array
   },
-  components: { LwbMap },
   data: () => ({
     items: [],
     mapScriptLoaded: false

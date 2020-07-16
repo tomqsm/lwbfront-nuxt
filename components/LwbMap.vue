@@ -1,36 +1,66 @@
 <template>
   <div>
-    <p>Map couldn't be displayed.</p>
+    <div class="lwbmap"></div>
+    <input type="text" />
   </div>
 </template>
 
 <script>
+import LwbAutocomplete from '@/components/LwbAutocomplete'
 export default {
+  // eslint-disable-next-line vue/no-unused-components
+  components: { LwbAutocomplete },
   props: {
     center: Object,
     markers: Array
   },
-  data: () => ({
-    items: []
-  }),
+  data: () => ({}),
   computed: {},
   mounted() {
-    const m = this.lwbMap()
-    this.addMarkers(m)
+    const map = this.lwbMap()
+    const markers = this.addMarkers(map)
+    const marker1 = markers[0]
+    const infoBox = this.createInfoBox('to to wstawiłem', marker1)
+    const ac = this.createAutocomplete(map)
+    marker1.addListener('click', function(e) {
+      console.log(e)
+      infoBox.open(map, marker1)
+    })
+    map.addListener('click', function(e) {
+      console.log(`${e.latLng.lat()}:${e.latLng.lng()}`)
+      infoBox.open(map, marker1)
+    })
+    // eslint-disable-next-line no-undef
+    google.maps.event.addListener(ac, 'place_changed', function() {
+      // eslint-disable-next-line no-unused-vars
+      const place = ac.getPlace()
+      console.log(place)
+      if (place.geometry.viewport) {
+        console.log('viewport')
+        map.fitBounds(place.geometry.viewport)
+      } else {
+        map.setCenter(place.geometry.location)
+        // eslint-disable-next-line no-undef
+        // marker.setPosition(place.geometry.location)
+      }
+    })
   },
   methods: {
     lwbMap() {
       // eslint-disable-next-line no-undef
-      const map = new google.maps.Map(this.$el, {
-        zoom: 7,
-        disableDoubleClickZoom: true,
-        streetViewControl: false
-      })
+      const map = new google.maps.Map(
+        this.$el.getElementsByClassName('lwbmap')[0],
+        {
+          zoom: 7,
+          // eslint-disable-next-line no-undef
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          // mapTypeId: google.maps.MapTypeId.TERRAIN,
+          disableDoubleClickZoom: true,
+          streetViewControl: false
+        }
+      )
       map.setCenter(this.center)
 
-      map.addListener('click', function(e) {
-        console.log(`${e.latLng.lat()}:${e.latLng.lng()}`)
-      })
       return map
     },
     addMarkers(map) {
@@ -48,6 +78,26 @@ export default {
         mks.push(m)
       }
       return mks
+    },
+    addMarkersToLocations(map, locations) {
+      const mks = []
+      locations.forEach((element) => {
+        // eslint-disable-next-line no-undef
+        const m = new google.maps.Marker({ position: element, map })
+        mks.push(m)
+      })
+      return mks
+    },
+    createInfoBox(text, marker) {
+      // eslint-disable-next-line no-undef
+      return new google.maps.InfoWindow({ content: text })
+    },
+    createAutocomplete(map) {
+      const input = this.$el.getElementsByTagName('input')[0]
+      // eslint-disable-next-line no-undef
+      const autoc = new google.maps.places.Autocomplete(input)
+      autoc.bindTo('bounds', map)
+      return autoc
     }
   }
 }
