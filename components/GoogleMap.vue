@@ -1,5 +1,5 @@
 <template>
-  <div class="geolocation">
+  <div>
     <LwbMap v-if="mapScriptLoaded" :center="center" :markers="markers" />
   </div>
 </template>
@@ -13,10 +13,12 @@ export default {
     center: Object,
     markers: Array
   },
-  data: () => ({
-    items: [],
-    mapScriptLoaded: false
-  }),
+  data() {
+    return {
+      items: [],
+      mapScriptLoaded: false
+    }
+  },
   watch: {},
   mounted() {
     if (typeof google === 'undefined') {
@@ -37,14 +39,6 @@ export default {
       } else {
         console.log('Already existed')
       }
-    },
-    geolocate() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      })
     }
   }
 }

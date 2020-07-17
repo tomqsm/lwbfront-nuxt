@@ -2,6 +2,9 @@
   <div>
     <div class="lwbmap"></div>
     <input type="text" />
+    <template v-if="Boolean(this.google) && Boolean(this.map)">
+      <slot :google="google" :map="map" />
+    </template>
   </div>
 </template>
 
