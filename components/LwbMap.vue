@@ -2,9 +2,6 @@
   <div>
     <div class="lwbmap"></div>
     <input type="text" />
-    <template v-if="Boolean(this.google) && Boolean(this.map)">
-      <slot :google="google" :map="map" />
-    </template>
   </div>
 </template>
 
@@ -14,6 +11,7 @@ export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { LwbAutocomplete },
   props: {
+    googleapi: Object,
     center: Object,
     markers: Array
   },
@@ -34,7 +32,7 @@ export default {
       infoBox.open(map, marker1)
     })
     // eslint-disable-next-line no-undef
-    google.maps.event.addListener(ac, 'place_changed', function() {
+    this.googleapi.maps.event.addListener(ac, 'place_changed', function() {
       // eslint-disable-next-line no-unused-vars
       const place = ac.getPlace()
       console.log(place)
@@ -51,12 +49,12 @@ export default {
   methods: {
     lwbMap() {
       // eslint-disable-next-line no-undef
-      const map = new google.maps.Map(
+      const map = new this.googleapi.maps.Map(
         this.$el.getElementsByClassName('lwbmap')[0],
         {
           zoom: 7,
           // eslint-disable-next-line no-undef
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeId: this.googleapi.maps.MapTypeId.ROADMAP,
           // mapTypeId: google.maps.MapTypeId.TERRAIN,
           disableDoubleClickZoom: true,
           streetViewControl: false
@@ -72,12 +70,12 @@ export default {
       if (this.markers && this.markers.length > 0) {
         this.markers.forEach((element) => {
           // eslint-disable-next-line no-undef
-          const m = new google.maps.Marker({ position: element, map })
+          const m = new this.googleapi.maps.Marker({ position: element, map })
           mks.push(m)
         })
       } else if (this.markers && this.markers.length === 0) {
         // eslint-disable-next-line no-undef
-        const m = new google.maps.Marker({ position: this.center, map })
+        const m = new this.googleapi.maps.Marker({ position: this.center, map })
         mks.push(m)
       }
       return mks
@@ -86,19 +84,19 @@ export default {
       const mks = []
       locations.forEach((element) => {
         // eslint-disable-next-line no-undef
-        const m = new google.maps.Marker({ position: element, map })
+        const m = new this.googleapi.maps.Marker({ position: element, map })
         mks.push(m)
       })
       return mks
     },
     createInfoBox(text, marker) {
       // eslint-disable-next-line no-undef
-      return new google.maps.InfoWindow({ content: text })
+      return new this.googleapi.maps.InfoWindow({ content: text })
     },
     createAutocomplete(map) {
       const input = this.$el.getElementsByTagName('input')[0]
       // eslint-disable-next-line no-undef
-      const autoc = new google.maps.places.Autocomplete(input)
+      const autoc = new this.googleapi.maps.places.Autocomplete(input)
       autoc.bindTo('bounds', map)
       return autoc
     }

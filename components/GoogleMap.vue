@@ -1,6 +1,11 @@
 <template>
   <div>
-    <LwbMap v-if="mapScriptLoaded" :center="center" :markers="markers" />
+    <LwbMap
+      v-if="mapScriptLoaded"
+      :center="center"
+      :markers="markers"
+      :googleapi="googleapi"
+    />
   </div>
 </template>
 
@@ -16,7 +21,15 @@ export default {
   data() {
     return {
       items: [],
-      mapScriptLoaded: false
+      mapScriptLoaded: false,
+      // eslint-disable-next-line no-undef
+      googleapiHolder: undefined
+    }
+  },
+  computed: {
+    googleapi() {
+      // eslint-disable-next-line no-undef
+      return this.googleapiHolder
     }
   },
   watch: {},
@@ -25,7 +38,7 @@ export default {
       const script = document.createElement('script')
       script.onload = this.onScriptLoaded
       script.type = 'text/javascript'
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&libraries=places`
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&libraries=places&language=pl&region=pl`
       document.head.appendChild(script)
     } else {
       this.onScriptLoaded()
@@ -34,8 +47,12 @@ export default {
   methods: {
     onScriptLoaded(event = null) {
       this.mapScriptLoaded = true
+      // eslint-disable-next-line no-undef
+      this.googleapiHolder = google
       if (event) {
         console.log('Was added')
+        // eslint-disable-next-line no-undef
+        // this.googleapi = google
       } else {
         console.log('Already existed')
       }
