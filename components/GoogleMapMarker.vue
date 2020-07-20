@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div>
+    <!-- <template> -->
+    <!-- <slot :google="google" :map="map" :markero="markero" :loaded="loaded" /> -->
+    <!-- </template> -->
+  </div>
 </template>
 <script>
 export default {
@@ -17,11 +21,24 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      markero: {},
+      loaded: false
+    }
+  },
   mounted() {
     // eslint-disable-next-line no-new
-    new this.google.maps.Marker({
+    const mar = new this.google.maps.Marker({
       position: this.marker.position,
-      map: this.map
+      map: this.map,
+      title: this.marker.title
+    })
+    const infoWindow = new this.google.maps.InfoWindow({
+      content: this.marker.infoWindow.content
+    })
+    mar.addListener('click', function() {
+      infoWindow.open(this.map, mar)
     })
   }
 }

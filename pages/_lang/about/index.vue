@@ -39,7 +39,8 @@
                 :marker="marker"
                 :google="google"
                 :map="map"
-              />
+              >
+              </GoogleMapMarker>
             </template>
           </GoogleMap>
         </keep-alive>
@@ -59,11 +60,19 @@ export default {
       markers: [
         {
           id: 'test1',
-          position: { lat: 52.811148538597904, lng: 21.711489989869552 }
+          position: { lat: 52.811148538597904, lng: 21.711489989869552 },
+          title: 'test 1',
+          infoWindow: {
+            content: 'this is info about test 1 <b>turbo</b>'
+          }
         },
         {
           id: 'test2',
-          position: { lat: 51.811148538597904, lng: 21.711489989869552 }
+          position: { lat: 51.811148538597904, lng: 21.711489989869552 },
+          title: 'test 2',
+          infoWindow: {
+            content: 'this is info about test 2'
+          }
         }
       ]
     }
