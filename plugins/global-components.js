@@ -6,7 +6,7 @@ import HomeTabs from '@/components/HomeTabs'
 import HomeCards from '@/components/HomeCards'
 import BlogArticle from '@/components/BlogArticle'
 import globalMixins from '@/mixins/global'
-import Geolocation from '@/components/GoogleMap'
+import GoogleMap from '@/components/GoogleMap'
 
 // this navbar isn't necessary as global but shows example
 Vue.mixin(globalMixins)
@@ -15,4 +15,4 @@ Vue.component('LoginForm', LoginForm)
 Vue.component('HomeTabs', HomeTabs)
 Vue.component('HomeCards', HomeCards)
 Vue.component('BlogArticle', BlogArticle)
-Vue.component('GoogleMap', Geolocation)
+Vue.component('GoogleMap', GoogleMap)

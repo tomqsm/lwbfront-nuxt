@@ -12,14 +12,14 @@
         <p class="float-left">
           <b>{{ $t('about.kontakt') }}:</b>&nbsp;
         </p>
-        <b-link v-if="!showEmail" href="" @click="showEmail = !showEmail">
-          {{ $t('about.pokazEmail') }}
-        </b-link>
+        <b-link v-if="!showEmail" href @click="showEmail = !showEmail">{{
+          $t('about.pokazEmail')
+        }}</b-link>
         <p v-else>
           website@letsweb.biz {{ $t('about.lub') }}
-          <a href="mailto:website@letsweb.biz">{{
-            $t('about.otworzSkrzynke')
-          }}</a>
+          <a href="mailto:website@letsweb.biz">
+            {{ $t('about.otworzSkrzynke') }}
+          </a>
         </p>
       </b-col>
       <b-col>
@@ -31,10 +31,17 @@
           <img :src="badgeImage" :alt="$t('about.badgeImageLabel')" />
         </a>
         <keep-alive>
-          <GoogleMap
-            :center="{ lat: 52.211148538597904, lng: 21.711489989869552 }"
-            :markers="[{ lat: 52.811148538597904, lng: 21.711489989869552 }]"
-          />
+          <GoogleMap :map-config="mapConfig">
+            <template slot-scope="{ google, map }">
+              <GoogleMapMarker
+                v-for="marker in markers"
+                :key="marker.id"
+                :marker="marker"
+                :google="google"
+                :map="map"
+              />
+            </template>
+          </GoogleMap>
         </keep-alive>
       </b-col>
     </b-row>
@@ -42,11 +49,23 @@
 </template>
 
 <script>
+import GoogleMapMarker from '@/components/GoogleMapMarker'
 export default {
+  components: { GoogleMapMarker },
   data() {
     return {
       pagelocale: this.$i18n.locale,
-      showEmail: false
+      showEmail: false,
+      markers: [
+        {
+          id: 'test1',
+          position: { lat: 52.811148538597904, lng: 21.711489989869552 }
+        },
+        {
+          id: 'test2',
+          position: { lat: 51.811148538597904, lng: 21.711489989869552 }
+        }
+      ]
     }
   },
   computed: {
@@ -54,6 +73,14 @@ export default {
       return this.pagelocale === 'pl'
         ? '/img/linkedin-badge_pl-min.PNG'
         : '/img/linkedin-badge_en-min.PNG'
+    },
+    mapConfig() {
+      return {
+        zoom: 7,
+        mapTypeId: 'terrain',
+        disableDoubleClickZoom: true,
+        streetViewControl: false
+      }
     }
   },
   methods: {},
