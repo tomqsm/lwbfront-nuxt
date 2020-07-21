@@ -13,7 +13,6 @@
 export default {
   props: {
     center: Object,
-    markers: Array,
     mapConfig: Object
   },
   data() {

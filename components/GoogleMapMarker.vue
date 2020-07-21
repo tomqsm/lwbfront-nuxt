@@ -16,7 +16,7 @@ export default {
       type: Object,
       required: true
     },
-    marker: {
+    markerConfig: {
       type: Object,
       required: true
     }
@@ -30,12 +30,12 @@ export default {
   mounted() {
     // eslint-disable-next-line no-new
     const mar = new this.google.maps.Marker({
-      position: this.marker.position,
+      position: this.markerConfig.position,
       map: this.map,
-      title: this.marker.title
+      title: this.markerConfig.title
     })
     const infoWindow = new this.google.maps.InfoWindow({
-      content: this.marker.infoWindow.content
+      content: this.markerConfig.infoWindow.content
     })
     mar.addListener('click', function() {
       infoWindow.open(this.map, mar)

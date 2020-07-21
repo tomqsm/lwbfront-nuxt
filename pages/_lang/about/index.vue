@@ -34,9 +34,9 @@
           <GoogleMap :map-config="mapConfig">
             <template slot-scope="{ google, map }">
               <GoogleMapMarker
-                v-for="marker in markers"
-                :key="marker.id"
-                :marker="marker"
+                v-for="config in markersConfig"
+                :key="config.id"
+                :marker-config="config"
                 :google="google"
                 :map="map"
               >
@@ -57,7 +57,7 @@ export default {
     return {
       pagelocale: this.$i18n.locale,
       showEmail: false,
-      markers: [
+      markersConfig: [
         {
           id: 'test1',
           position: { lat: 52.811148538597904, lng: 21.711489989869552 },
