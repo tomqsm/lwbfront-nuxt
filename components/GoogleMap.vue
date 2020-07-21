@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="googlemap"></div>
-    <template v-if="mapScriptLoaded">
+    <template v-if="mapScriptLoaded && mapInitialized">
       <slot :google="google" :map="map" />
     </template>
   </div>
@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       mapScriptLoaded: false,
-      map: undefined
+      mapInitialized: false,
+      map: null
     }
   },
   computed: {
@@ -51,20 +52,19 @@ export default {
       }
       // eslint-disable-next-line no-undef
       this.googleapi = google
-      this.initializeMap(this.map)
+      this.initializeMap()
     },
-    initializeMap(mapUndefined) {
+    initializeMap() {
       // this.map gets nulled and each time needs to be created
-      if (mapUndefined === undefined) {
-        console.log('initialized maps')
-        // eslint-disable-next-line no-unused-vars
-        const mapContainer = this.$refs.googleMap
-        this.map = new this.google.maps.Map(
-          this.$el.getElementsByClassName('googlemap')[0],
-          this.mapConfig
-        )
-        this.map.setCenter({ lat: 52.811148538597904, lng: 21.711489989869552 })
-      }
+      console.log('initialized maps')
+      // eslint-disable-next-line no-unused-vars
+      const mapContainer = this.$refs.googleMap
+      this.map = new this.google.maps.Map(
+        this.$el.getElementsByClassName('googlemap')[0],
+        this.mapConfig
+      )
+      this.map.setCenter({ lat: 52.811148538597904, lng: 21.711489989869552 })
+      this.mapInitialized = true
     }
   }
 }

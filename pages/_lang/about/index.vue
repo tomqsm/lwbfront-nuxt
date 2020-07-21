@@ -39,8 +39,8 @@
                 :marker-config="config"
                 :google="google"
                 :map="map"
-              >
-              </GoogleMapMarker>
+              />
+              <GoogleMapAutocomplete :google="google" :map="map" />
             </template>
           </GoogleMap>
         </keep-alive>
@@ -51,8 +51,9 @@
 
 <script>
 import GoogleMapMarker from '@/components/GoogleMapMarker'
+import GoogleMapAutocomplete from '@/components/GoogleMapAutocomplete'
 export default {
-  components: { GoogleMapMarker },
+  components: { GoogleMapMarker, GoogleMapAutocomplete },
   data() {
     return {
       pagelocale: this.$i18n.locale,
@@ -85,7 +86,7 @@ export default {
     },
     mapConfig() {
       return {
-        zoom: 7,
+        zoom: 6,
         mapTypeId: 'terrain',
         disableDoubleClickZoom: true,
         streetViewControl: false
